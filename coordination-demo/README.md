@@ -1,15 +1,31 @@
-# Coordination Demo (Layer 3: No-Cascade Coordination)
+# coordination-demo
 
-Status: planned, not yet implemented. Part of the-three-ways.
+Layer 3 from the talk: No-Cascade Coordination.
 
-## What this will show
+A minimal analyzer → migrator → validator pipeline in [`agents.py`](./agents.py), migrating five legacy account balances (a plain `"1200.00"` format, or `"75.00 CR"` for a credit/negative balance) into a new numeric format. The migrator has one real bug: the credit-marker check is case-sensitive, so a balance written as `"75.00 cr"` (lowercase) comes out positive instead of negative. It never raises, so it reports success regardless.
 
-A minimal 3-agent pipeline: analyzer, migrator, validator.
+[`pipeline.py`](./pipeline.py) wires the three stages together with the validation boundary as a single switch:
 
-Without a boundary: the analyzer produces a subtly wrong result. The migrator builds on it. The validator trusts the stage before it instead of independently checking, and rubber-stamps the error through. The whole pipeline looks healthy the entire time.
+- **`FakeIndependentValidator`**: what most "independent verification" stages actually are. It only checks whether the migrator reported success.
+- **`RealIndependentValidator`**: re-derives the correct answer from the original source data itself, without looking at what the migrator claimed.
 
-With a boundary: a real validation check at the seam between stages, plus a gated human sign-off on the one irreversible step. The same bad analyzer output gets caught and contained instead of cascading.
+## Run it
 
-Two versions of the pipeline, boundary on and boundary off, so you can see the failure cascade vs. contained side by side.
+Requires Python 3.10+.
 
-See the top-level FAILURE_MAP.md for the full Layer 3 diagnostic, and the talk deck and write-up linked in the root README for the full walkthrough.
+```bash
+python demo.py
+```
+
+```bash
+pip install pytest
+pytest
+```
+
+## What to look at
+
+Same migrator, same bug, both runs. With the fake validator, the corrupted record ships silently, the pipeline reports `SHIPPED` and nobody knows account A4 is off by $150. With the real validator, the pipeline reports `BLOCKED_FOR_HUMAN_SIGNOFF` and names exactly which record and why. `test_coordination.py` locks in both: the bug exists and self-reports success either way, and only the real validator catches it, on exactly the one record that's actually wrong, not a false-positive on the four that are fine.
+
+Bounded autonomy and failure isolation only work if the check at the seam is real. A validator that just asks the previous stage "are you okay?" is not a validator, it's a rubber stamp with an official-sounding name.
+
+Part of [the-three-ways](../).

@@ -1,15 +1,27 @@
-# Tools Demo (Layer 1: Reliable Tool Calls)
+# tools-demo
 
-Status: planned, not yet implemented. Part of the-three-ways.
+Layer 1 from the talk: Reliable Tool Calls.
 
-## What this will show
+Two versions of the same tool, `search_code`, backed by the exact same (deliberately buggy) data: it paginates internally but only returns page one. The difference between them is entirely in the contract, not the logic.
 
-A loose vs. strict tool schema for an agent's code-search tool.
+- [`loose_tool.py`](./loose_tool.py): untyped input, returns a plain string, no error state. Truncated results and empty results look identical to the caller.
+- [`strict_tool.py`](./strict_tool.py): typed input (`KnownFunction`, an enum, so a malformed query never runs), and a real `Success | LowConfidence | Failure` result. `LowConfidence` is the state most tool schemas can't express: "it worked, but I'm not sure it's the whole answer."
 
-Loose: a tool contract that just says "returns a string." A partial or wrong result looks identical to a correct one, no error, no signal.
+## Run it
 
-Strict: typed inputs, an explicit error contract (Result or Failure), idempotent retries, and a third state for "succeeded, but low confidence."
+Requires Python 3.10+ (uses `match` and `X | Y` union types).
 
-A runnable script will call both versions against a deliberately bad call and show the strict schema catching what the loose one silently accepts.
+```bash
+python demo.py
+```
 
-See the top-level FAILURE_MAP.md for the full Layer 1 diagnostic, and the talk deck and write-up linked in the root README for the full walkthrough.
+```bash
+pip install pytest
+pytest
+```
+
+## What to look at
+
+`demo.py` runs both tools against the same underlying bug and prints the difference: the loose tool returns 5 of 14 real call sites with no indication anything is missing; the strict tool returns the same 5 items wrapped in `LowConfidence`, telling the caller explicitly that the answer is incomplete. A separate call with a malformed query is rejected on the spot by the strict tool, where the loose tool would silently return `""`, indistinguishable from a genuine "no results."
+
+Part of [the-three-ways](../).

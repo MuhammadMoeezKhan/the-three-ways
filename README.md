@@ -16,14 +16,14 @@ LinkedIn: https://www.linkedin.com/in/moeez-khan-/
 
 ## Status
 
-Launched alongside the talk (Sept 3, 2026). The Failure Map checklist below is complete and ready to use today. The three runnable demos are being built out over the following days, each is marked below.
+Complete. All three demos are runnable, with tests.
 
 | Piece | Status |
 |---|---|
 | FAILURE_MAP.md | Done |
-| tools-demo | Planned, not yet implemented |
-| memory-demo | Planned, not yet implemented |
-| coordination-demo | Planned, not yet implemented |
+| tools-demo | Done |
+| memory-demo | Done |
+| coordination-demo | Done |
 
 ## The Failure Map
 
@@ -31,15 +31,15 @@ FAILURE_MAP.md, a one-page checklist for locating which of the three layers is b
 
 ## Layer 1: Tools, Reliable Tool Calls
 
-tools-demo: a loose vs. strict tool schema (typed inputs, an explicit error contract, idempotency), and a script showing the strict schema catching a bad call the loose one would silently accept.
+[`tools-demo`](./tools-demo): a loose vs. strict tool schema (typed inputs, an explicit error contract, idempotency), and a script showing the strict schema catching a bad call the loose one would silently accept.
 
 ## Layer 2: Memory, RAG vs. Knowledge Graph
 
-memory-demo: a toy legacy codebase with a deliberately buried cross-file dependency, one script using plain retrieval (misses it), one using a shallow one-hop graph (catches it).
+[`memory-demo`](./memory-demo): a toy legacy codebase with a deliberately buried cross-file dependency, one script using plain retrieval (misses it), one using a shallow one-hop graph (catches it).
 
 ## Layer 3: Coordination, No-Cascade Coordination
 
-coordination-demo: a minimal 3-agent pipeline (analyzer, migrator, validator) with a validation boundary and a gated human sign-off step, plus a version with the boundary removed, so you can see the failure cascade vs. contained.
+[`coordination-demo`](./coordination-demo): a minimal 3-agent pipeline (analyzer, migrator, validator) with a validation boundary and a gated human sign-off step, plus a version with the boundary removed, so you can see the failure cascade vs. contained.
 
 ## License
 
