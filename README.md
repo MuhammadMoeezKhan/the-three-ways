@@ -1,6 +1,6 @@
 # the-three-ways
 
-*The opinions, insights, and perspectives in this repo and the accompanying talk are solely my own and do not reflect those of my current or past employers, nor do they convey any confidential information by any means. Everything here is for educational purposes only.*
+**Disclaimer:** *The opinions, insights, and perspectives in this repo and the accompanying talk are solely my own and do not reflect those of my current or past employers, nor do they convey any confidential information by any means. Everything here is for educational purposes only.*
 
 Companion repo for "The Three Ways AI Agents Fail. Here's How to Fix Yours.", a talk at Commit Your Code 2026 (Sept 3).
 
