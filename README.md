@@ -1,9 +1,12 @@
 # the-three-ways
 
+*The opinions, insights, and perspectives in this repo and the accompanying talk are solely my own and do not reflect those of my current or past employers, nor do they convey any confidential information by any means. Everything here is for educational purposes only.*
+
 Companion repo for "The Three Ways AI Agents Fail. Here's How to Fix Yours.", a talk at Commit Your Code 2026 (Sept 3).
 
 Talk deck: https://www.moeezkhan.com/decks/cyc-2026.html
 Full write-up: https://www.moeezkhan.com/writing/agentic-systems-fail-in-production
+LinkedIn: https://www.linkedin.com/in/moeez-khan-/
 
 ## Status
 
@@ -35,7 +38,3 @@ coordination-demo: a minimal 3-agent pipeline (analyzer, migrator, validator) wi
 ## License
 
 MIT, see LICENSE.
-
----
-
-The opinions, insights, and perspectives in this repo and the accompanying talk are solely my own and do not reflect those of my current or past employers, nor do they convey any confidential information by any means.
