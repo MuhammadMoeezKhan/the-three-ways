@@ -5,7 +5,13 @@
 Companion repo for "The Three Ways AI Agents Fail. Here's How to Fix Yours.", a talk at Commit Your Code 2026 (Sept 3).
 
 Talk deck: https://www.moeezkhan.com/decks/cyc-2026.html
+
+<br>
+
 Full write-up: https://www.moeezkhan.com/writing/agentic-systems-fail-in-production
+
+<br>
+
 LinkedIn: https://www.linkedin.com/in/moeez-khan-/
 
 ## Status
